@@ -74,7 +74,7 @@ By isolating the top 10 most common words across both target subsets, distinct
 linguistic profiles emerge for each class. These structural differences provide 
 a strong predictive foundation for our classification algorithms.
 
-![img text][(https://github.com/sankeerthankam/Data-Science/blob/master/Mini%20Projects/Machine%20Learning/Spam%20Classification/img/Class%20Balance.png](https://github.com/sankeerthankam/Data-Science/blob/f2e9cd86bee1bd269c07dd220691fb9fe46eeec7/Mini%20Projects/Machine%20Learning/Spam%20Classification/img/Class%20Balance.png))
+![img text]((https://github.com/sankeerthankam/Data-Science/blob/f2e9cd86bee1bd269c07dd220691fb9fe46eeec7/Mini%20Projects/Machine%20Learning/Spam%20Classification/img/Class%20Balance.png))
 
 ### Class Profile 1: SPAM (Target: 1)
 
