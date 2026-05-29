@@ -32,7 +32,6 @@ The first block establishes a clean, mathematically sound foundation for the dat
 
 The `transform_text` function prepares raw text data so classical machine learning algorithms (like Naive Bayes or Logistic Regression) can extract clean patterns without being distracted by linguistic noise. 
 
-
 ### Technical Breakdown of `transform_text`
 
 1. **Case Normalization & Tokenization**
@@ -82,7 +81,7 @@ a strong predictive foundation for our classification algorithms.
 ![img text](https://github.com/sankeerthankam/Data-Science/blob/f2e9cd86bee1bd269c07dd220691fb9fe46eeec7/Mini%20Projects/Machine%20Learning/Spam%20Classification/img/Class%20Balance.png)
 
 
-### Class Profile 1: SPAM (Target: 1)
+### <b> Class Profile 1: SPAM (Target: 1) </b>
 
 * **Dominant Vocabulary Characteristics:** High concentration of transactional, urgent, and financial hooks. 
   *Key Tokens:* `"call"`, `"free"`, `"txt"`, `"prize"`, `"claim"`.
@@ -92,7 +91,7 @@ a strong predictive foundation for our classification algorithms.
 
 ![img text](https://github.com/sankeerthankam/Data-Science/blob/7611643556c9df682f6928bb5c9c7275fbdde03a/Mini%20Projects/Machine%20Learning/Spam%20Classification/img/Hist%201.png)
 
-### Class Profile 2: HAM (Target: 0)
+### <b> Class Profile 2: HAM (Target: 0) </b>
 
 * **Dominant Vocabulary Characteristics:** Dominated by personal pronouns, everyday conversational verbs, and 
   colloquial short-hand expressions. 
@@ -102,101 +101,62 @@ a strong predictive foundation for our classification algorithms.
 
 ![img text](https://github.com/sankeerthankam/Data-Science/blob/7611643556c9df682f6928bb5c9c7275fbdde03a/Mini%20Projects/Machine%20Learning/Spam%20Classification/img/Hist%202.png)
 
-### Key Analytical Takeaways
+### <b> Key Analytical Takeaways </b>
 
 1. **Urgency vs. Casual Interaction**
-   * **Spam payload markers:** Spam vocabulary is overwhelmingly 
-     action-oriented and commercial. Words like `"prize"` and `"claim"` 
-     are explicitly used to manufacture synthetic urgency or capitalize 
-     on financial interest.
-   * **Ham conversational markers:** Legitimate messages represent 
-     unstructured, standard human interaction. They consist of situational 
-     planning words (`"go"`, `"come"`) or brief acknowledgments (`"ok"`), 
-     which rarely appear with high frequency in broadcast spam.
+   * **Spam payload markers:** Spam vocabulary is overwhelmingly action-oriented and commercial. Words like `"prize"` and `"claim"` are explicitly used to manufacture synthetic urgency or capitalize on financial interest.
+   * **Ham conversational markers:** Legitimate messages represent unstructured, standard human interaction. They consist of situational planning words (`"go"`, `"come"`) or brief acknowledgments (`"ok"`), which rarely appear with high frequency in broadcast spam.
 
 2. **Feature Leverage for Classical Models**
-   * Because the vocabularies of Ham and Spam have remarkably low overlap 
-     among their top-frequency tiers, classical models like **Multinomial 
-     Naive Bayes** will perform exceptionally well. 
-   * These distinct keyword signals allow the model to compute highly 
-     polarized class conditional probabilities:
+   * Because the vocabularies of Ham and Spam have remarkably low overlap among their top-frequency tiers, classical models like **Multinomial Naive Bayes** will perform exceptionally well. 
+   * These distinct keyword signals allow the model to compute highly polarized class conditional probabilities:
      $$\text{P}(\text{word} \mid \text{Spam}) \quad \text{vs.} \quad \text{P}(\text{word} \mid \text{Ham})$$
 
 ---
 
-## 4. This stage of the notebook transitions from exploratory text analysis to 
-predictive modeling. It covers text vectorization, cross-validation, 
-automated hyperparameter optimization, and a full performance review 
-across classical and ensemble classifiers.
+## 4. Model Training
+Predictive modeling. It covers text vectorization, cross-validation, automated hyperparameter optimization, and a full performance review across classical and ensemble classifiers.
 
+#### <b> TF-IDF Text Vectorization </b>
 
-#### Model Training
-
-<b> 6.1. TF-IDF Text Vectorization </b>
-
-<b>Term Frequency-Inverse Document Frequency (TF-IDF):</b> Reflects how
-important a word is to a document relative to the entire corpus. It penalizes
-highly frequent words (like generic terms) while boosting rare, highly
-informative words (like `"prize", "claim", or "txt"`).
+<b>Term Frequency-Inverse Document Frequency (TF-IDF):</b> Reflects how important a word is to a document relative to the entire corpus. It penalizes highly frequent words (like generic terms) while boosting rare, highly informative words (like `"prize", "claim", or "txt"`).
 
 <b>Dimensionality Control `max_features=3000`:</b> Limits the vocabulary to the top 3,000 words sorted by term frequency. This prevents sparse matrix explosion, reduces memory overhead, and mitigates the "curse of dimensionality."
 
-#### <b> 6.2. Cross-Validation & Optimization Infrastructure </b>
+#### <b> Cross-Validation & Optimization Infrastructure </b>
 
-<b> Robust Train-Test Splitting:</b> A 20% validation holdout split isolates
-testing data entirely, guaranteeing an unbiased final accuracy calculation.
+<b> Robust Train-Test Splitting:</b> A 20% validation holdout split isolates testing data entirely, guaranteeing an unbiased final accuracy calculation.
 
-<b>Stratification Safety (KFold(n_splits=5)):</b> Evaluates the models using
-5-fold cross-validation. This ensures every data point is used for training
-and validation exactly once, diminishing model evaluation variance.
+<b>Stratification Safety (KFold(n_splits=5)):</b> Evaluates the models using 5-fold cross-validation. This ensures every data point is used for training and validation exactly once, diminishing model evaluation variance.
 
-Automated Scaling Pipeline: Wrapping models inside make_pipeline(MinMaxScaler(), ...)
-guarantees that input spaces are bounded strictly between 0 and 1. This is
-technically required to satisfy the mathematical boundaries of MultinomialNB,
-which crashes if it encounters negative scaled values. 
+Automated Scaling Pipeline: Wrapping models inside make_pipeline(MinMaxScaler(), ...) guarantees that input spaces are bounded strictly between 0 and 1. This is technically required to satisfy the mathematical boundaries of MultinomialNB, which crashes if it encounters negative scaled values. 
+
+---
 
 ## 5. Model Performance Evaluation
 
-### <b> 6.3. Model Performance & Evaluation Breakdown </b>
+### <b> Model Performance & Evaluation Breakdown </b>
 
-Based on the execution scores from the holdout dataset evaluation loop, the
-classifiers achieved the following performance rankings:
+Based on the execution scores from the holdout dataset evaluation loop, the classifiers achieved the following performance rankings:
 
 #### <b> Tier 1: Top Performers (Scores > 97.5%) </b> 
 
-<b>Logistic Regression (Score: 0.9807):</b> The strongest single classical
-model. Because text vector spaces are highly dimensional and linear,
-Logistic Regression computes effective boundary separations with a low risk
-of overfitting.
+<b>Logistic Regression (Score: 0.9807):</b> The strongest single classical model. Because text vector spaces are highly dimensional and linear, Logistic Regression computes effective boundary separations with a low risk of overfitting.
 
-<b> Stacking Model (Score: 0.9787):</b> Combines an SVC and a Random Forest
-via a Logistic Regression meta-classifier. It maximizes accuracy by leveraging
-the diverse architectural predictions of its underlying base estimators.
+<b> Stacking Model (Score: 0.9787):</b> Combines an SVC and a Random Forest via a Logistic Regression meta-classifier. It maximizes accuracy by leveraging the diverse architectural predictions of its underlying base estimators.
 
-<b> Multinomial Naive Bayes (Score: 0.9758):</b> A highly efficient, low-overhead
-baseline. It performs exceptionally well here because it relies on word
-frequency probabilities, matching the clean keyword signals in our spam
-corpus.
+<b> Multinomial Naive Bayes (Score: 0.9758):</b> A highly efficient, low-overhead baseline. It performs exceptionally well here because it relies on word frequency probabilities, matching the clean keyword signals in our spam corpus.
 
 #### <b> Tier 2: Strong Contenders (Scores 96% - 97.4%) </b> 
 
-<b> Bernoulli Naive Bayes (Score: 0.9729):</b> Operates on binary word
-presence/absence. It remains robust but falls slightly behind Multinomial
-NB because it ignores term frequency magnitude.
+<b> Bernoulli Naive Bayes (Score: 0.9729):</b> Operates on binary word presence/absence. It remains robust but falls slightly behind Multinomial NB because it ignores term frequency magnitude.
 
-<b> Random Forest (Score: 0.9642):</b> Dependable ensemble technique, though
-limited here by a capped estimator count (n_estimators: 10).
+<b> Random Forest (Score: 0.9642):</b> Dependable ensemble technique, though limited here by a capped estimator count (n_estimators: 10).
 
 #### <b> Tier 3: Underperforming Architectures (Scores < 93%) </b> 
 
-<b> XGBoost (Score: 0.9275) & CatBoost (Score: 0.8975):</b> Gradient boosting
-trees struggle compared to linear classifiers in sparse, highly dimensional
-text setups due to their reliance on orthogonal, axis-aligned decision
-splits.
+<b> XGBoost (Score: 0.9275) & CatBoost (Score: 0.8975):</b> Gradient boosting trees struggle compared to linear classifiers in sparse, highly dimensional text setups due to their reliance on orthogonal, axis-aligned decision splits.
 
-<b> Gaussian Naive Bayes (Score: 0.8588):</b> Achieves the lowest performance.
-It incorrectly assumes that TF-IDF word frequencies follow a standard,
-continuous normal Gaussian curve, forcing a poor mathematical fit onto
-the sparse text matrix data.
+<b> Gaussian Naive Bayes (Score: 0.8588):</b> Achieves the lowest performance. It incorrectly assumes that TF-IDF word frequencies follow a standard, continuous normal Gaussian curve, forcing a poor mathematical fit onto the sparse text matrix data.
 
 ---
