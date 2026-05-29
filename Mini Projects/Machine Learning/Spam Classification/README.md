@@ -26,6 +26,7 @@ The first block establishes a clean, mathematically sound foundation for the dat
 * **Rows:** Stripped of redundant, overlapping data points to prevent data leakage.
 * **Targets:** Converted into a machine-readable format and assessed for class imbalance.
 
+---
 
 ## 2. Data Processing
 
@@ -56,6 +57,8 @@ The `.apply()` method executes this text cleaning pipeline row-by-row over the r
 
 > **Important Note:** This design keeps the original raw text column completely intact. This is crucial because context-aware deep learning models like BERT rely heavily on original casing, punctuation, and full sentence structures, whereas classical bag-of-words models perform best on the heavily stripped down `transformed_text`.
 
+---
+
 ## 3. EDA 
 
 #### <b> Insights </b>
@@ -65,6 +68,8 @@ By observing the structural differences between both generated assets:
 Spam Messages Word Cloud: Accents transactional, high-urgency, or financial hooks (e.g., prominent displays of words like `"call", "free", "txt", "prize", or "claim")`.
 
 Ham Messages Word Cloud: Accents casual conversation, personal logistics, and normal vocabulary patterns `(e.g., words like "go", "ok", "love", "come", or "ur")`.
+
+![img text](https://github.com/sankeerthankam/Data-Science/blob/7611643556c9df682f6928bb5c9c7275fbdde03a/Mini%20Projects/Machine%20Learning/Spam%20Classification/img/Word%20Cloud.png)
 
 #### <b> Class Distribution </b>
 
@@ -85,6 +90,8 @@ a strong predictive foundation for our classification algorithms.
   conditional probabilities; serves as strong indicator tokens for malicious 
   intent.
 
+![img text](https://github.com/sankeerthankam/Data-Science/blob/7611643556c9df682f6928bb5c9c7275fbdde03a/Mini%20Projects/Machine%20Learning/Spam%20Classification/img/Hist%201.png)
+
 ### Class Profile 2: HAM (Target: 0)
 
 * **Dominant Vocabulary Characteristics:** Dominated by personal pronouns, everyday conversational verbs, and 
@@ -93,6 +100,7 @@ a strong predictive foundation for our classification algorithms.
 * **Predictive Modeling Utility:** Establishes the baseline linguistic pattern of safe communication, 
   which is vital for helping the model reduce False Positive rates.
 
+![img text](https://github.com/sankeerthankam/Data-Science/blob/7611643556c9df682f6928bb5c9c7275fbdde03a/Mini%20Projects/Machine%20Learning/Spam%20Classification/img/Hist%202.png)
 
 ### Key Analytical Takeaways
 
@@ -114,6 +122,7 @@ a strong predictive foundation for our classification algorithms.
      polarized class conditional probabilities:
      $$\text{P}(\text{word} \mid \text{Spam}) \quad \text{vs.} \quad \text{P}(\text{word} \mid \text{Ham})$$
 
+---
 
 ## 4. This stage of the notebook transitions from exploratory text analysis to 
 predictive modeling. It covers text vectorization, cross-validation, 
@@ -190,3 +199,4 @@ It incorrectly assumes that TF-IDF word frequencies follow a standard,
 continuous normal Gaussian curve, forcing a poor mathematical fit onto
 the sparse text matrix data.
 
+---
