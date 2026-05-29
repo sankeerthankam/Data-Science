@@ -76,6 +76,7 @@ a strong predictive foundation for our classification algorithms.
 
 ![img text]((https://github.com/sankeerthankam/Data-Science/blob/f2e9cd86bee1bd269c07dd220691fb9fe46eeec7/Mini%20Projects/Machine%20Learning/Spam%20Classification/img/Class%20Balance.png))
 
+
 ### Class Profile 1: SPAM (Target: 1)
 
 * **Dominant Vocabulary Characteristics:** High concentration of transactional, urgent, and financial hooks. 
