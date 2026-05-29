@@ -1,6 +1,6 @@
 # Project for Classifying Texts as SPAM or NOT SPAM
 
-### 1. Data Cleaning
+## 1. Data Cleaning
 
 The first block establishes a clean, mathematically sound foundation for the dataset by handling data ingestion, structural cleaning, and label encoding.
 
@@ -27,7 +27,7 @@ The first block establishes a clean, mathematically sound foundation for the dat
 * **Targets:** Converted into a machine-readable format and assessed for class imbalance.
 
 
-### 2. Data Processing
+## 2. Data Processing
 
 The `transform_text` function prepares raw text data so classical machine learning algorithms (like Naive Bayes or Logistic Regression) can extract clean patterns without being distracted by linguistic noise. 
 
@@ -56,7 +56,7 @@ The `.apply()` method executes this text cleaning pipeline row-by-row over the r
 
 > **Important Note:** This design keeps the original raw text column completely intact. This is crucial because context-aware deep learning models like BERT rely heavily on original casing, punctuation, and full sentence structures, whereas classical bag-of-words models perform best on the heavily stripped down `transformed_text`.
 
-### 3. EDA 
+## 3. EDA 
 
 #### <b> Insights </b>
 
@@ -74,6 +74,7 @@ By isolating the top 10 most common words across both target subsets, distinct
 linguistic profiles emerge for each class. These structural differences provide 
 a strong predictive foundation for our classification algorithms.
 
+![alt text]([https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png ](https://github.com/sankeerthankam/Data-Science/blob/master/Mini%20Projects/Machine%20Learning/Spam%20Classification/img/Class%20Balance.png)"Class Balance")
 
 ### Class Profile 1: SPAM (Target: 1)
 
@@ -113,7 +114,7 @@ a strong predictive foundation for our classification algorithms.
      $$\text{P}(\text{word} \mid \text{Spam}) \quad \text{vs.} \quad \text{P}(\text{word} \mid \text{Ham})$$
 
 
- ### 4. This stage of the notebook transitions from exploratory text analysis to 
+## 4. This stage of the notebook transitions from exploratory text analysis to 
 predictive modeling. It covers text vectorization, cross-validation, 
 automated hyperparameter optimization, and a full performance review 
 across classical and ensemble classifiers.
@@ -144,7 +145,7 @@ guarantees that input spaces are bounded strictly between 0 and 1. This is
 technically required to satisfy the mathematical boundaries of MultinomialNB,
 which crashes if it encounters negative scaled values. 
 
-### 5. Model Performance Evaluation
+## 5. Model Performance Evaluation
 
 ### <b> 6.3. Model Performance & Evaluation Breakdown </b>
 
